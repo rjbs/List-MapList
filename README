@@ -1,0 +1,12 @@
+README for List::MapList
+
+List::MapList provides methods to map a list through a list of transformations,
+instead of just one. The transformations are not chained together on each
+element; only one is used, alternating sequentially.
+
+Here's a contrived example: given the transformations { $_ = 0 } and { $_ = 1
+}, the list (1, 2, 3, "Good morning", undef) would become (0, 1, 0, 1, 0) or,
+without cycling, (0, 1).;
+
+(I use this code to process a part number in which each digit maps to a set of
+product attributes.)
