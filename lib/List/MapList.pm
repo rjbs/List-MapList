@@ -5,9 +5,9 @@ use strict;
 use warnings;
 
 use base qw(Exporter);
-our @EXPORT = qw(mapcycle maplist); 
+our @EXPORT = qw(mapcycle maplist); ## no critic
 
-our $VERSION = '1.12';
+our $VERSION = '1.121';
 
 =head1 NAME
 
@@ -15,7 +15,7 @@ List::MapList -- map lists through a list of subs, not just one
 
 =head1 VERSION
 
-version 1.12
+version 1.121
 
  $Id: MapList.pm,v 1.6 2005/03/18 21:03:41 rjbs Exp $
 
@@ -77,7 +77,7 @@ mapped to C<()>.
 sub maplist {
 	my ($subs, $current) = (shift, 0);
 	my $code = sub { $subs->[$current++] || sub { () }; };
-	map $code->()->(), @_;
+	map { $code->()->() } @_;
 }
 
 =item C<< mapcycle($coderefs, LIST) >>
@@ -90,7 +90,7 @@ coderefs over and over as needed.
 sub mapcycle {
 	my ($subs, $current) = (shift, 0);
 	my $code = sub { $subs->[$current++ % @$subs]; };
-	map $code->()->(), @_;
+	map { $code->()->() } @_;
 }
 
 =back
@@ -99,14 +99,14 @@ sub mapcycle {
 
 ...nothing?
 
-=head1 AUTHORS
+=head1 AUTHOR
 
 Ricardo SIGNES E<lt>rjbs@iqep.comE<gt>
 
 =head1 COPYRIGHT
 
-This code is Copyright 2004, Ricardo SIGNES.  It is free software, available
-under the same terms as Perl itself.
+This code is Copyright 2004-2006, Ricardo SIGNES.  It is free software,
+available under the same terms as Perl itself.
 
 =cut
 
