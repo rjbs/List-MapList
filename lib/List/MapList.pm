@@ -17,7 +17,7 @@ List::MapList -- map lists through a list of subs, not just one
 
 version 1.121
 
- $Id: MapList.pm,v 1.6 2005/03/18 21:03:41 rjbs Exp $
+ $Id$
 
 =head1 SYNOPSIS
 
