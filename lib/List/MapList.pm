@@ -1,4 +1,3 @@
-
 package List::MapList;
 
 use strict;
@@ -11,19 +10,17 @@ our $VERSION = '1.121';
 
 =head1 NAME
 
-List::MapList -- map lists through a list of subs, not just one
+List::MapList - map lists through a list of subs, not just one
 
 =head1 VERSION
 
 version 1.121
 
- $Id$
-
 =head1 SYNOPSIS
 
 Contrived heterogenous transform
 
- use List::MapList
+ use List::MapList;
 
  my $code = [
    sub { $_ + 1 },
@@ -32,9 +29,11 @@ Contrived heterogenous transform
    sub { $_ + 4 }
  ];
 
- my @mapped = maplist( $code, qw(1 2 3 4 5 6 7 8 9));
+ my @mapped_1 = maplist( $code, qw(1 2 3 4 5 6 7 8 9));
+ # @mapped_1 is qw(2 4 6 8)
 
- # @mapped is qw(2 4 6 8 6 8 10 12 13)
+ my @mapped_2 = mapcycle( $code, qw(1 2 3 4 5 6 7 8 9));
+ # @mapped_2 is qw(2 4 6 8 6 8 10 12 13)
 
 Ultra-secure partial rot13:
 
@@ -64,7 +63,9 @@ product attributes.)
 
 =over
 
-=item C<< maplist($coderefs, LIST) >>
+=item maplist
+
+  my @results = maplist(\@coderefs, LIST);
 
 This routine acts much like a normal C<map>, but uses the list of code
 references in C<$coderefs> in parallel with the list members.  First first code
@@ -80,7 +81,9 @@ sub maplist {
 	map { $code->()->() } @_;
 }
 
-=item C<< mapcycle($coderefs, LIST) >>
+=item mapcycle
+
+  my @results = mapcycle($coderefs, LIST);
 
 This routine is identical to C<maplist>, but will cycle through the passed
 coderefs over and over as needed.
@@ -101,7 +104,7 @@ sub mapcycle {
 
 =head1 AUTHOR
 
-Ricardo SIGNES E<lt>rjbs@iqep.comE<gt>
+Ricardo SIGNES E<lt>rjbs@cpan.org<gt>
 
 =head1 COPYRIGHT
 
