@@ -6,7 +6,7 @@ use warnings;
 use base qw(Exporter);
 our @EXPORT = qw(mapcycle maplist); ## no critic
 
-our $VERSION = '1.121';
+our $VERSION = '1.122';
 
 =head1 NAME
 
@@ -14,7 +14,7 @@ List::MapList - map lists through a list of subs, not just one
 
 =head1 VERSION
 
-version 1.121
+version 1.122
 
 =head1 SYNOPSIS
 
