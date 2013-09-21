@@ -1,20 +1,10 @@
-package List::MapList;
-
 use strict;
 use warnings;
+package List::MapList;
+# ABSTRACT: map lists through a list of subs, not just one
 
-use base qw(Exporter);
+use Exporter 5.57 'import';
 our @EXPORT = qw(mapcycle maplist); ## no critic
-
-our $VERSION = '1.122';
-
-=head1 NAME
-
-List::MapList - map lists through a list of subs, not just one
-
-=head1 VERSION
-
-version 1.122
 
 =head1 SYNOPSIS
 
@@ -59,11 +49,7 @@ Here's a contrived example: given the transformations C<{ $_ = 0 }> and C<{ $_
 (I use this code to process a part number in which each digit maps to a set of
 product attributes.)
 
-=head1 FUNCTIONS
-
-=over
-
-=item maplist
+=func maplist
 
   my @results = maplist(\@coderefs, LIST);
 
@@ -81,7 +67,7 @@ sub maplist {
 	map { $code->()->() } @_;
 }
 
-=item mapcycle
+=func mapcycle
 
   my @results = mapcycle($coderefs, LIST);
 
@@ -95,22 +81,5 @@ sub mapcycle {
 	my $code = sub { $subs->[$current++ % @$subs]; };
 	map { $code->()->() } @_;
 }
-
-=back
-
-=head1 TODO
-
-...nothing?
-
-=head1 AUTHOR
-
-Ricardo SIGNES E<lt>rjbs@cpan.org<gt>
-
-=head1 COPYRIGHT
-
-This code is Copyright 2004-2006, Ricardo SIGNES.  It is free software,
-available under the same terms as Perl itself.
-
-=cut
 
 1;
