@@ -62,9 +62,9 @@ mapped to C<()>.
 =cut
 
 sub maplist {
-	my ($subs, $current) = (shift, 0);
-	my $code = sub { $subs->[$current++] || sub { () }; };
-	map { $code->()->() } @_;
+  my ($subs, $current) = (shift, 0);
+  my $code = sub { $subs->[$current++] || sub { () }; };
+  map { $code->()->() } @_;
 }
 
 =func mapcycle
@@ -77,9 +77,9 @@ coderefs over and over as needed.
 =cut
 
 sub mapcycle {
-	my ($subs, $current) = (shift, 0);
-	my $code = sub { $subs->[$current++ % @$subs]; };
-	map { $code->()->() } @_;
+  my ($subs, $current) = (shift, 0);
+  my $code = sub { $subs->[$current++ % @$subs]; };
+  map { $code->()->() } @_;
 }
 
 1;
